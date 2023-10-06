@@ -4,7 +4,8 @@ using UnityEngine.InputSystem; // Import the InputSystem namespace
 public class MelodyNote : MonoBehaviour
 {
     public int Index;
-    public AudioClip melodyClip; // Reference to the MP3 audio clip.
+    public AudioClip melodyClip;
+    public Collider flowerCollider;// Reference to the MP3 audio clip.
 
     private void Update()
     {
@@ -21,17 +22,20 @@ public class MelodyNote : MonoBehaviour
                 // Check if the left mouse button is pressed.
                 if (Mouse.current.leftButton.wasPressedThisFrame)
                 {
-                    // Play the assigned audio clip.
-                    AudioSource audioSource = GetComponent<AudioSource>();
-                    if (audioSource == null)
+                    if (hit.collider == flowerCollider)
                     {
-                        // Add an AudioSource component if one doesn't exist.
-                        audioSource = gameObject.AddComponent<AudioSource>();
+                        // Play the assigned audio clip.
+                        AudioSource audioSource = GetComponent<AudioSource>();
+                        if (audioSource == null)
+                        {
+                            // Add an AudioSource component if one doesn't exist.
+                            audioSource = gameObject.AddComponent<AudioSource>();
+                        }
+
+
+                        audioSource.clip = melodyClip;
+                        audioSource.Play();
                     }
-
-
-                    audioSource.clip = melodyClip;
-                    audioSource.Play();
                 }
             }
         }

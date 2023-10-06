@@ -9,11 +9,14 @@ public class AimingController : MonoBehaviour
     public GameObject crosshair; // Reference to your crosshair UI element.
     public MelodyManager melodyManager;
     public AudioManager audioManager;
+    public List<Collider> flowerPotsColliders;
     private Transform currentAimedObject; // The currently aimed-at object (if any).
     private Transform firstAimedObject; // The first object the player aims at.
     private Transform secondAimedObject; // The second object the player aims at.
     private float raiseAmount = 0.3f;
     private List<Transform> raisedObjects = new List<Transform>();
+    private Collider lastHitCollider;
+    
 
 
     // Enum to represent the state of an object.
@@ -47,20 +50,24 @@ public class AimingController : MonoBehaviour
             // For simplicity, you can scale the crosshair up slightly.
             crosshair.transform.localScale = Vector3.one * 1.2f;
 
+
+            lastHitCollider = hit.collider;
+
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {
                 if (currentAimedObject != null)
                 {
                     if (currentAimedObject.name == "Parrot_Solution_1")
                     {
-                        StartCoroutine(audioManager.PlayMelody(0.5f));
+                        audioManager.PlayMelody(0.5f);
 
                         if (melodyManager.IsPuzzleSolved())
                         {
                             Debug.Log("Solved");
                         }
                     }
-                    if (currentAimedObject.GetComponent<MelodyNote>() != null)
+
+                    if (lastHitCollider != null & flowerPotsColliders.Contains(lastHitCollider))
                     {
                         ObjectState objectState;
 
@@ -92,13 +99,8 @@ public class AimingController : MonoBehaviour
                                 break;
                         }
                     }
-                    else
-                    {
-                        // Handle interactions with non-MelodyNote objects here.
-                    }
                 }
             }
-
         }
         else
         {
@@ -107,6 +109,8 @@ public class AimingController : MonoBehaviour
 
             // Reset the crosshair to its original appearance
             crosshair.transform.localScale = Vector3.one;
+
+            lastHitCollider = null;
         }
     }
 
