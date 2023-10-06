@@ -15,6 +15,7 @@ namespace StarterAssets
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
+		public bool playSolution;
 
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
@@ -39,6 +40,11 @@ namespace StarterAssets
 			JumpInput(value.isPressed);
 		}
 
+		public void OnPlaySolution(InputValue value)
+        {
+			PlaySolutionInput(value.isPressed);
+        }
+
 		public void OnSprint(InputValue value)
 		{
 			SprintInput(value.isPressed);
@@ -60,6 +66,11 @@ namespace StarterAssets
 		{
 			jump = newJumpState;
 		}
+
+		public void PlaySolutionInput(bool newPlaySolutionState)
+        {
+			playSolution = newPlaySolutionState;
+        }
 
 		public void SprintInput(bool newSprintState)
 		{

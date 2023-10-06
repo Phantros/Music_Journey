@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour
     private bool isPlayingMelody = false;
 
     // Play audio clips from MelodyNotes in the current order.
-    public void PlayMelody(float delay)
+    public void PlayCurrentMelody(float delay)
     {
         // Check if the PlayMelody coroutine is already running
         if (isPlayingMelody)

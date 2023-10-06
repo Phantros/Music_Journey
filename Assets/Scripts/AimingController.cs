@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 public class AimingController : MonoBehaviour
 {
-    public LayerMask InteractableLayer; // The layer containing interactable objects.
+    public LayerMask interactableLayer; // The layer containing interactable objects.
+    public LayerMask highlightLayer; //The layer containing the highlight shader.
     public GameObject crosshair; // Reference to your crosshair UI element.
     public MelodyManager melodyManager;
     public AudioManager audioManager;
@@ -15,9 +16,9 @@ public class AimingController : MonoBehaviour
     private Transform secondAimedObject; // The second object the player aims at.
     private float raiseAmount = 0.3f;
     private List<Transform> raisedObjects = new List<Transform>();
-    private Collider lastHitCollider;
-    
-
+    private Transform lastAimedObject;
+    private Collider lastAimedCollider;
+    private Keyboard keyboard;
 
     // Enum to represent the state of an object.
     private enum ObjectState
@@ -31,6 +32,11 @@ public class AimingController : MonoBehaviour
 
     private Dictionary<Transform, ObjectState> objectStates = new Dictionary<Transform, ObjectState>();
 
+    private void Start()
+    {
+        keyboard = Keyboard.current;
+    }
+
     private void Update()
     {
         // Create a ray from the center of the screen
@@ -40,18 +46,32 @@ public class AimingController : MonoBehaviour
         RaycastHit hit;
 
         // Check if the ray hits an object on the interactable layer
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, InteractableLayer))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Interactable", "Highlight")))
         {
             // Store the currently aimed-at object
             currentAimedObject = hit.transform;
+            lastAimedCollider = hit.collider;
 
             // Make the crosshair change color or appearance to indicate targeting
-            // You can also implement a UI element for this.
-            // For simplicity, you can scale the crosshair up slightly.
             crosshair.transform.localScale = Vector3.one * 1.2f;
 
+            SetLayerRecursively(hit.collider.gameObject, "Highlight");
 
-            lastHitCollider = hit.collider;
+            if (currentAimedObject != lastAimedObject)
+            {
+                if (lastAimedObject != null)
+                {
+                    SetLayerRecursively(lastAimedObject.gameObject, "Interactable");
+                }
+
+                lastAimedObject = currentAimedObject;
+            }
+             
+            if(keyboard.qKey.wasPressedThisFrame)
+            {
+                Debug.Log("Pressed Q");
+                audioManager.PlayCurrentMelody(0.3f);
+            }
 
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {
@@ -59,7 +79,7 @@ public class AimingController : MonoBehaviour
                 {
                     if (currentAimedObject.name == "Parrot_Solution_1")
                     {
-                        audioManager.PlayMelody(0.5f);
+                        audioManager.PlayCurrentMelody(0.5f);
 
                         if (melodyManager.IsPuzzleSolved())
                         {
@@ -67,7 +87,7 @@ public class AimingController : MonoBehaviour
                         }
                     }
 
-                    if (lastHitCollider != null & flowerPotsColliders.Contains(lastHitCollider))
+                    if (lastAimedCollider != null & flowerPotsColliders.Contains(lastAimedCollider))
                     {
                         ObjectState objectState;
 
@@ -104,13 +124,18 @@ public class AimingController : MonoBehaviour
         }
         else
         {
-            // No object is being aimed at
             currentAimedObject = null;
+            lastAimedCollider = null;
 
             // Reset the crosshair to its original appearance
             crosshair.transform.localScale = Vector3.one;
 
-            lastHitCollider = null;
+            if (lastAimedObject != null)
+            {
+                //lastHitCollider.gameObject.layer = interactableMask;
+                SetLayerRecursively(lastAimedObject.gameObject, "Interactable"); 
+                lastAimedObject = null;
+            }
         }
     }
 
@@ -237,5 +262,15 @@ public class AimingController : MonoBehaviour
         // Lower both objects back down to the lowered state.
         LowerObjectGradually(objA);
         LowerObjectGradually(objB);
+    }
+
+    // Function to set the layer of a GameObject and all its children recursively
+    private void SetLayerRecursively(GameObject obj, string layerName)
+    {
+        obj.layer = LayerMask.NameToLayer(layerName);
+        foreach (Transform child in obj.transform)
+        {
+            SetLayerRecursively(child.gameObject, layerName);
+        }
     }
 }
