@@ -13,6 +13,7 @@ public class AimingController : MonoBehaviour
     public AudioManager audioManager;
     public List<Collider> flowerPotsColliders;
     public TextMeshProUGUI textMeshPro;
+    public Canvas signCanvas;
     private Transform currentAimedObject; // The currently aimed-at object (if any).
     private Transform firstAimedObject; // The first object the player aims at.
     private Transform secondAimedObject; // The second object the player aims at.
@@ -53,6 +54,8 @@ public class AimingController : MonoBehaviour
             // Store the currently aimed-at object
             currentAimedObject = hit.transform;
             lastAimedCollider = hit.collider;
+            Debug.Log("curret aimed at object is: " + currentAimedObject.name);
+            Debug.Log("last aimed at collider is: " + lastAimedCollider.name);
 
             // Make the crosshair change color or appearance to indicate targeting
             crosshair.transform.localScale = Vector3.one * 1.2f;
@@ -69,11 +72,11 @@ public class AimingController : MonoBehaviour
                 lastAimedObject = currentAimedObject;
             }
              
-            if(keyboard.qKey.wasPressedThisFrame)
+            //For later
+            /*if(keyboard.qKey.wasPressedThisFrame)
             {
-                Debug.Log("Pressed Q");
                 audioManager.PlayCurrentMelody(0.3f);
-            }
+            }*/
 
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {
@@ -81,7 +84,16 @@ public class AimingController : MonoBehaviour
                 {
                     if (currentAimedObject.name == "Parrot_Solution_1")
                     {
-                        audioManager.PlayCurrentMelody(0.5f);
+                        audioManager.PlaySolutionMelody(0.5f);
+
+                        if (signCanvas.gameObject.activeSelf == false)
+                        {
+                            signCanvas.gameObject.SetActive(true);
+                        }
+                        else
+                        {
+                            signCanvas.gameObject.SetActive(false);
+                        }
 
                         if (melodyManager.IsPuzzleSolved())
                         {
