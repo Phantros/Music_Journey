@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 public class AimingController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class AimingController : MonoBehaviour
     public MelodyManager melodyManager;
     public AudioManager audioManager;
     public List<Collider> flowerPotsColliders;
+    public TextMeshProUGUI textMeshPro;
     private Transform currentAimedObject; // The currently aimed-at object (if any).
     private Transform firstAimedObject; // The first object the player aims at.
     private Transform secondAimedObject; // The second object the player aims at.
@@ -83,6 +85,7 @@ public class AimingController : MonoBehaviour
 
                         if (melodyManager.IsPuzzleSolved())
                         {
+                            textMeshPro.gameObject.SetActive(true);
                             Debug.Log("Solved");
                         }
                     }
