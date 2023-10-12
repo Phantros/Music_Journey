@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem; // Import the InputSystem namespace
 
@@ -6,7 +7,19 @@ public class MelodyNote : MonoBehaviour
     public int Index;
     public AudioClip melodyClip;
     public Collider flowerCollider;// Reference to the MP3 audio clip.
+    public List<GameObject> melodyNotes;
 
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        // Add an AudioSource component if one doesn't exist.
+        audioSource = gameObject.GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
     private void Update()
     {
         // Check if an audio clip is assigned.
@@ -35,6 +48,10 @@ public class MelodyNote : MonoBehaviour
 
                         audioSource.clip = melodyClip;
                         audioSource.Play();
+                        foreach (GameObject bobbingNotes in melodyNotes)
+                        {
+                            bobbingNotes.SetActive(true);
+                        }
                     }
                 }
             }
@@ -42,6 +59,14 @@ public class MelodyNote : MonoBehaviour
         else
         {
             Debug.LogWarning("No audio clip assigned to MelodyNote.");
+        }
+
+        if(audioSource.isPlaying == false)
+        {
+            foreach (GameObject bobbingNotes in melodyNotes)
+            {
+                bobbingNotes.SetActive(false);
+            }
         }
     }
 
@@ -58,6 +83,11 @@ public class MelodyNote : MonoBehaviour
         {
             audioSource.clip = melodyClip;
             audioSource.Play();
+
+            foreach (GameObject bobbingNotes in melodyNotes)
+            {
+                bobbingNotes.SetActive(true);
+            }
         }
     }
 }

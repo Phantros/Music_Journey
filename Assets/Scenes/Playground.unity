@@ -218,6 +218,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Music_Note (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92ae9d243fbd8843940a19fedce0015,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92ae9d243fbd8843940a19fedce0015, type: 3}
 --- !u!1 &38508753 stripped
@@ -356,6 +361,7 @@ GameObject:
   - component: {fileID: 72266843}
   - component: {fileID: 72266847}
   - component: {fileID: 72266848}
+  - component: {fileID: 72266849}
   m_Layer: 6
   m_Name: Flower_4
   m_TagString: Untagged
@@ -459,6 +465,9 @@ MonoBehaviour:
   Index: 3
   melodyClip: {fileID: 8300000, guid: 6cff78a582c5257478596557e64d4d2f, type: 3}
   flowerCollider: {fileID: 72266848}
+  melodyNotes:
+  - {fileID: 1715256789}
+  - {fileID: 1526637680}
 --- !u!136 &72266848
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -473,12 +482,30 @@ CapsuleCollider:
   m_Height: 1.3412454
   m_Direction: 1
   m_Center: {x: -0.035253525, y: 1.4194437, z: 0}
+--- !u!114 &72266849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72266842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eae0cf7a83a44a4e851524993a1aff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flowerCollider: {fileID: 72266848}
+  potCollider: {fileID: 72266843}
+  flower: {fileID: 1949656759}
+  pot: {fileID: 1721798700}
+  InteractableLayer: Interactable
+  HighlightLayer: Highlight
 --- !u!1001 &81001233
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 997885908}
     m_Modifications:
     - target: {fileID: 100000, guid: 661464e19c087564badb2bf5230c842c, type: 3}
       propertyPath: m_Name
@@ -486,19 +513,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 661464e19c087564badb2bf5230c842c, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 661464e19c087564badb2bf5230c842c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.947517
+      value: 28.407045
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 661464e19c087564badb2bf5230c842c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.02
+      value: -0.68800664
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 661464e19c087564badb2bf5230c842c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 32.076797
+      value: 2.1576843
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 661464e19c087564badb2bf5230c842c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -506,7 +533,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 661464e19c087564badb2bf5230c842c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 661464e19c087564badb2bf5230c842c, type: 3}
       propertyPath: m_LocalRotation.y
@@ -548,6 +575,7 @@ GameObject:
   - component: {fileID: 88073164}
   - component: {fileID: 88073168}
   - component: {fileID: 88073169}
+  - component: {fileID: 88073170}
   m_Layer: 6
   m_Name: Flower_1
   m_TagString: Untagged
@@ -651,6 +679,9 @@ MonoBehaviour:
   Index: 0
   melodyClip: {fileID: 8300000, guid: 9bebffc3768b9d14b98ff10777ff9eff, type: 3}
   flowerCollider: {fileID: 88073169}
+  melodyNotes:
+  - {fileID: 38508753}
+  - {fileID: 552743511}
 --- !u!136 &88073169
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -665,6 +696,24 @@ CapsuleCollider:
   m_Height: 1.3412454
   m_Direction: 1
   m_Center: {x: -0.035253525, y: 1.4194437, z: 0}
+--- !u!114 &88073170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88073163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eae0cf7a83a44a4e851524993a1aff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flowerCollider: {fileID: 88073169}
+  potCollider: {fileID: 88073164}
+  flower: {fileID: 1630792885}
+  pot: {fileID: 1367501571}
+  InteractableLayer: Interactable
+  HighlightLayer: Highlight
 --- !u!4 &141461876 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 603970f97e50c56488ec3c5a6febd940,
@@ -841,6 +890,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Music_Note (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92ae9d243fbd8843940a19fedce0015,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92ae9d243fbd8843940a19fedce0015, type: 3}
@@ -1347,6 +1401,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Music_Note (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92ae9d243fbd8843940a19fedce0015,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92ae9d243fbd8843940a19fedce0015, type: 3}
 --- !u!4 &466635385 stripped
@@ -1478,6 +1537,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Music_Note
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92ae9d243fbd8843940a19fedce0015,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92ae9d243fbd8843940a19fedce0015, type: 3}
@@ -1653,6 +1717,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 603970f97e50c56488ec3c5a6febd940, type: 3}
+--- !u!4 &581104555 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 57d3eed6d2253d24994d5ad37e00aedc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1881324123}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &593368054 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 603970f97e50c56488ec3c5a6febd940,
@@ -2053,7 +2123,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &654026830
 PrefabInstance:
@@ -2181,7 +2251,7 @@ PrefabInstance:
     - target: {fileID: 8063073397250431797, guid: f0271df749728104eac22c3d897fd8ce,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8063073397250431797, guid: f0271df749728104eac22c3d897fd8ce,
         type: 3}
@@ -2264,7 +2334,7 @@ GameObject:
   - component: {fileID: 805238551}
   - component: {fileID: 805238554}
   m_Layer: 6
-  m_Name: Parrot_Solution_1
+  m_Name: Tutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2485,6 +2555,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 603970f97e50c56488ec3c5a6febd940,
     type: 3}
   m_PrefabInstance: {fileID: 545397769}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &916895338 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 01e0f40a3d4702a4d9dbe99f0d84aa9c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2048364204}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &932608412
 PrefabInstance:
@@ -2832,7 +2908,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 14.13, y: -0.013756394, z: 4.9883533}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 805238550}
   - {fileID: 88073167}
@@ -2841,7 +2917,7 @@ Transform:
   - {fileID: 72266846}
   - {fileID: 1046244387}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &997885907
 GameObject:
@@ -2889,8 +2965,11 @@ Transform:
   - {fileID: 1087589163}
   - {fileID: 359477568}
   - {fileID: 689886468}
+  - {fileID: 1436076592}
+  - {fileID: 2120414225}
+  - {fileID: 581104555}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1011589012
 PrefabInstance:
@@ -3344,6 +3423,7 @@ GameObject:
   - component: {fileID: 1046244384}
   - component: {fileID: 1046244388}
   - component: {fileID: 1046244389}
+  - component: {fileID: 1046244390}
   m_Layer: 6
   m_Name: Flower_5
   m_TagString: Untagged
@@ -3447,6 +3527,9 @@ MonoBehaviour:
   Index: 4
   melodyClip: {fileID: 8300000, guid: 4eb661896452a4d41a12358d5c96859a, type: 3}
   flowerCollider: {fileID: 1046244389}
+  melodyNotes:
+  - {fileID: 418140113}
+  - {fileID: 715620364}
 --- !u!136 &1046244389
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3461,6 +3544,24 @@ CapsuleCollider:
   m_Height: 1.3412454
   m_Direction: 1
   m_Center: {x: -0.035253525, y: 1.4194437, z: 0}
+--- !u!114 &1046244390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046244383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eae0cf7a83a44a4e851524993a1aff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flowerCollider: {fileID: 1046244389}
+  potCollider: {fileID: 1046244384}
+  flower: {fileID: 1108182393}
+  pot: {fileID: 1016215189}
+  InteractableLayer: Interactable
+  HighlightLayer: Highlight
 --- !u!4 &1087589163 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 661464e19c087564badb2bf5230c842c,
@@ -3661,7 +3762,7 @@ PrefabInstance:
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
@@ -3715,6 +3816,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
+--- !u!1 &1225015454 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 01e0f40a3d4702a4d9dbe99f0d84aa9c,
+    type: 3}
+  m_PrefabInstance: {fileID: 949300722}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1268824232 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 6c7eaede4efc960409fb9ef2dfb77f29,
@@ -3860,6 +3967,25 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 440a0f74d8047bd42b243f61158852eb, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01e0f40a3d4702a4d9dbe99f0d84aa9c, type: 3}
+--- !u!1 &1294904408 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 01e0f40a3d4702a4d9dbe99f0d84aa9c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1414311316}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1294904409
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294904408}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 45, y: 42.16511, z: 45}
+  m_Center: {x: 0, y: 16.082573, z: 0}
 --- !u!1001 &1310612502
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3952,6 +4078,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Music_Note (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92ae9d243fbd8843940a19fedce0015,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92ae9d243fbd8843940a19fedce0015, type: 3}
 --- !u!20 &1328552092 stripped
@@ -3965,7 +4096,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 997885908}
     m_Modifications:
     - target: {fileID: 100000, guid: 57d3eed6d2253d24994d5ad37e00aedc, type: 3}
       propertyPath: m_Name
@@ -3973,7 +4104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 57d3eed6d2253d24994d5ad37e00aedc, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 57d3eed6d2253d24994d5ad37e00aedc, type: 3}
       propertyPath: m_LocalScale.x
@@ -3989,15 +4120,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 57d3eed6d2253d24994d5ad37e00aedc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.5
+      value: 41.959526
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 57d3eed6d2253d24994d5ad37e00aedc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.2
+      value: -1.8680067
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 57d3eed6d2253d24994d5ad37e00aedc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 72.3
+      value: 42.38089
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 57d3eed6d2253d24994d5ad37e00aedc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4005,7 +4136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 57d3eed6d2253d24994d5ad37e00aedc, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 57d3eed6d2253d24994d5ad37e00aedc, type: 3}
       propertyPath: m_LocalRotation.y
@@ -4043,6 +4174,19 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2048364204}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1367501572
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916895338}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 45, y: 42.16511, z: 45}
+  m_Center: {x: 0, y: 16.082573, z: 0}
 --- !u!1001 &1402827283
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4058,7 +4202,7 @@ PrefabInstance:
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2070925441746177912, guid: a1a802ecaf6775746bb2a929fb554ad8,
         type: 3}
@@ -4368,8 +4512,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: Music_Note (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92ae9d243fbd8843940a19fedce0015,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92ae9d243fbd8843940a19fedce0015, type: 3}
+--- !u!4 &1436076592 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 57d3eed6d2253d24994d5ad37e00aedc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1339103830}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1453377364
 GameObject:
   m_ObjectHideFlags: 0
@@ -4465,7 +4620,7 @@ RectTransform:
   - {fileID: 358947379}
   - {fileID: 1021211909}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4563,6 +4718,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Music_Note (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92ae9d243fbd8843940a19fedce0015,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92ae9d243fbd8843940a19fedce0015, type: 3}
@@ -4793,6 +4953,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Music_Note (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92ae9d243fbd8843940a19fedce0015,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92ae9d243fbd8843940a19fedce0015, type: 3}
 --- !u!1 &1488579055
@@ -4942,6 +5107,7 @@ GameObject:
   - component: {fileID: 1511089280}
   - component: {fileID: 1511089284}
   - component: {fileID: 1511089285}
+  - component: {fileID: 1511089286}
   m_Layer: 6
   m_Name: Flower_2
   m_TagString: Untagged
@@ -5045,6 +5211,9 @@ MonoBehaviour:
   Index: 1
   melodyClip: {fileID: 8300000, guid: 3a8deba262e8814448674ef5415f2d5b, type: 3}
   flowerCollider: {fileID: 1511089285}
+  melodyNotes:
+  - {fileID: 842113750}
+  - {fileID: 828400442}
 --- !u!136 &1511089285
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5059,6 +5228,24 @@ CapsuleCollider:
   m_Height: 1.3412454
   m_Direction: 1
   m_Center: {x: -0.035253525, y: 1.4194437, z: 0}
+--- !u!114 &1511089286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511089279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eae0cf7a83a44a4e851524993a1aff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flowerCollider: {fileID: 1511089285}
+  potCollider: {fileID: 1511089280}
+  flower: {fileID: 141489295}
+  pot: {fileID: 635403227}
+  InteractableLayer: Interactable
+  HighlightLayer: Highlight
 --- !u!1 &1526637680 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d92ae9d243fbd8843940a19fedce0015,
@@ -5121,7 +5308,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1548650665
 MonoBehaviour:
@@ -5436,6 +5623,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Music_Note (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92ae9d243fbd8843940a19fedce0015,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92ae9d243fbd8843940a19fedce0015, type: 3}
 --- !u!1001 &1696990597
@@ -5632,7 +5824,7 @@ PrefabInstance:
     - target: {fileID: 3893294197879345259, guid: 64dce48905ffd9b4293e595fa6941544,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3893294197879345259, guid: 64dce48905ffd9b4293e595fa6941544,
         type: 3}
@@ -5749,10 +5941,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   highlightLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   crosshair: {fileID: 358947378}
   melodyManager: {fileID: 805238554}
   audioManager: {fileID: 1548650665}
@@ -5770,6 +5962,19 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 949300722}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1766053159
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225015454}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 45, y: 42.16511, z: 45}
+  m_Center: {x: 0, y: 16.082573, z: 0}
 --- !u!1001 &1780200492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5951,6 +6156,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ea980fdc4aa5e749b000c1a0d4b9bbc, type: 3}
+--- !u!1 &1797079730 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 01e0f40a3d4702a4d9dbe99f0d84aa9c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1285940113}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1797079731
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797079730}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 45, y: 42.16511, z: 45}
+  m_Center: {x: 0, y: 16.082573, z: 0}
 --- !u!1001 &1803338892
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6269,6 +6493,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Music_Note (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d92ae9d243fbd8843940a19fedce0015,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d92ae9d243fbd8843940a19fedce0015, type: 3}
 --- !u!1001 &1823141481
@@ -6343,7 +6572,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 997885908}
     m_Modifications:
     - target: {fileID: 100000, guid: 57d3eed6d2253d24994d5ad37e00aedc, type: 3}
       propertyPath: m_Name
@@ -6351,7 +6580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 57d3eed6d2253d24994d5ad37e00aedc, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 57d3eed6d2253d24994d5ad37e00aedc, type: 3}
       propertyPath: m_LocalScale.x
@@ -6367,15 +6596,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 57d3eed6d2253d24994d5ad37e00aedc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -83.1
+      value: -63.640472
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 57d3eed6d2253d24994d5ad37e00aedc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.2
+      value: -1.8680067
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 57d3eed6d2253d24994d5ad37e00aedc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 72.3
+      value: 42.38089
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 57d3eed6d2253d24994d5ad37e00aedc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6383,7 +6612,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 57d3eed6d2253d24994d5ad37e00aedc, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 57d3eed6d2253d24994d5ad37e00aedc, type: 3}
       propertyPath: m_LocalRotation.y
@@ -6594,6 +6823,7 @@ GameObject:
   - component: {fileID: 1934645417}
   - component: {fileID: 1934645421}
   - component: {fileID: 1934645422}
+  - component: {fileID: 1934645423}
   m_Layer: 6
   m_Name: Flower_3
   m_TagString: Untagged
@@ -6697,6 +6927,9 @@ MonoBehaviour:
   Index: 2
   melodyClip: {fileID: 8300000, guid: 3f42a2105c606bc408a7d303466a362a, type: 3}
   flowerCollider: {fileID: 1934645422}
+  melodyNotes:
+  - {fileID: 504531372}
+  - {fileID: 1491687184}
 --- !u!136 &1934645422
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6711,6 +6944,24 @@ CapsuleCollider:
   m_Height: 1.3412454
   m_Direction: 1
   m_Center: {x: -0.035253525, y: 1.4194437, z: 0}
+--- !u!114 &1934645423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934645416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eae0cf7a83a44a4e851524993a1aff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flowerCollider: {fileID: 1934645422}
+  potCollider: {fileID: 1934645417}
+  flower: {fileID: 561572554}
+  pot: {fileID: 1766053158}
+  InteractableLayer: Interactable
+  HighlightLayer: Highlight
 --- !u!1 &1944251338
 GameObject:
   m_ObjectHideFlags: 0
@@ -6955,7 +7206,7 @@ PrefabInstance:
     - target: {fileID: 597308369130767402, guid: 2f7f3dde7ae722a4aafffe20691ad702,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 597308369130767402, guid: 2f7f3dde7ae722a4aafffe20691ad702,
         type: 3}
@@ -7597,6 +7848,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ea980fdc4aa5e749b000c1a0d4b9bbc, type: 3}
+--- !u!1 &2086385846 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 01e0f40a3d4702a4d9dbe99f0d84aa9c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1035978802}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2086385847
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086385846}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 45, y: 42.16511, z: 45}
+  m_Center: {x: 0, y: 16.082573, z: 0}
+--- !u!4 &2120414225 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 661464e19c087564badb2bf5230c842c,
+    type: 3}
+  m_PrefabInstance: {fileID: 81001233}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2114283753834967212
 GameObject:
   m_ObjectHideFlags: 0

@@ -60,18 +60,17 @@ public class AimingController : MonoBehaviour
             // Make the crosshair change color or appearance to indicate targeting
             crosshair.transform.localScale = Vector3.one * 1.2f;
 
-            SetLayerRecursively(hit.collider.gameObject, "Highlight");
+            //SetLayerRecursively(hit.collider.gameObject, "Highlight");
 
             if (currentAimedObject != lastAimedObject)
             {
-                if (lastAimedObject != null)
-                {
-                    SetLayerRecursively(lastAimedObject.gameObject, "Interactable");
-                }
-
                 lastAimedObject = currentAimedObject;
             }
              
+            if(currentAimedObject.name == "Tutorial")
+            {
+                SetLayerRecursively(currentAimedObject.gameObject, "Highlight");
+            }
             //For later
             /*if(keyboard.qKey.wasPressedThisFrame)
             {
@@ -82,7 +81,7 @@ public class AimingController : MonoBehaviour
             {
                 if (currentAimedObject != null)
                 {
-                    if (currentAimedObject.name == "Parrot_Solution_1")
+                    if (currentAimedObject.name == "Tutorial")
                     {
                         audioManager.PlaySolutionMelody(0.5f);
 
