@@ -6,8 +6,6 @@ using TMPro;
 
 public class AimingController : MonoBehaviour
 {
-    public LayerMask interactableLayer; // The layer containing interactable objects.
-    public LayerMask highlightLayer; //The layer containing the highlight shader.
     public GameObject crosshair; // Reference to your crosshair UI element.
     public MelodyManager melodyManager;
     public AudioManager audioManager;
@@ -15,7 +13,7 @@ public class AimingController : MonoBehaviour
     public TextMeshProUGUI textMeshPro;
     public Canvas signCanvas;
 
-    private ParticleSystem particleSystem;
+    private new ParticleSystem particleSystem;
     private Transform currentAimedObject; // The currently aimed-at object (if any).
     private Transform firstAimedObject; // The first object the player aims at.
     private Transform secondAimedObject; // The second object the player aims at.
@@ -198,6 +196,8 @@ public class AimingController : MonoBehaviour
             {
                 int indexA = firstAimedObject.GetComponent<MelodyNote>().Index;
                 int indexB = secondAimedObject.GetComponent<MelodyNote>().Index;
+
+                Debug.Log("A = " + indexA + "B = " + indexB);
                 melodyManager.SwapPieces(indexA, indexB);
 
                 // Interpolate positions between firstAimedObject and secondAimedObject.
