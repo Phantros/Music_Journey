@@ -12,7 +12,9 @@ public class AimingController : MonoBehaviour
     public List<Collider> flowerPotsColliders;
     public TextMeshProUGUI textMeshPro;
     public Canvas signCanvas;
+    public AudioClip liftPotClip;
 
+    private AudioSource audioSource;
     private new ParticleSystem particleSystem;
     private Transform currentAimedObject; // The currently aimed-at object (if any).
     private Transform firstAimedObject; // The first object the player aims at.
@@ -34,6 +36,16 @@ public class AimingController : MonoBehaviour
     }
 
     private Dictionary<Transform, ObjectState> objectStates = new Dictionary<Transform, ObjectState>();
+    
+    private void Start()
+    {
+        // Add an AudioSource component if one doesn't exist.
+        audioSource = gameObject.GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
 
     private void Update()
     {
@@ -111,6 +123,8 @@ public class AimingController : MonoBehaviour
                                 objectStates[currentAimedObject] = ObjectState.Raising;
                                 particleSystem = currentAimedObject.GetComponentInChildren<ParticleSystem>();
                                 particleSystem.Play();
+                                audioSource.clip = liftPotClip;
+                                audioSource.Play();
                                 break;
                             case ObjectState.Raising:
                                 // Object is already raising, do nothing.
@@ -194,10 +208,13 @@ public class AimingController : MonoBehaviour
             // When secondAimedObject is raised, swap pieces and interpolate positions.
             if (objectStates[secondAimedObject] == ObjectState.Raised)
             {
-                int indexA = firstAimedObject.GetComponent<MelodyNote>().Index;
-                int indexB = secondAimedObject.GetComponent<MelodyNote>().Index;
+                int indexA = firstAimedObject.GetComponent<MelodyNote>().index;
 
-                Debug.Log("A = " + indexA + "B = " + indexB);
+                Debug.Log("Index A = " + indexA);
+
+                int indexB = secondAimedObject.GetComponent<MelodyNote>().index;
+
+                Debug.Log("Index B = " + indexB);
                 melodyManager.SwapPieces(indexA, indexB);
 
                 // Interpolate positions between firstAimedObject and secondAimedObject.
