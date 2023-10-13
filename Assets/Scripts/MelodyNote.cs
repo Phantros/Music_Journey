@@ -9,10 +9,13 @@ public class MelodyNote : MonoBehaviour
     public Collider flowerCollider;// Reference to the MP3 audio clip.
     public List<GameObject> melodyNotes;
 
+    private Animator animator;
     private AudioSource audioSource;
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
+
         // Add an AudioSource component if one doesn't exist.
         audioSource = gameObject.GetComponent<AudioSource>();
         if (audioSource == null)
@@ -37,6 +40,7 @@ public class MelodyNote : MonoBehaviour
                 {
                     if (hit.collider == flowerCollider)
                     {
+                        animator.SetTrigger("Clicked");
                         // Play the assigned audio clip.
                         AudioSource audioSource = GetComponent<AudioSource>();
                         if (audioSource == null)
@@ -58,7 +62,7 @@ public class MelodyNote : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("No audio clip assigned to MelodyNote.");
+            return;
         }
 
         if(audioSource.isPlaying == false)
@@ -72,6 +76,8 @@ public class MelodyNote : MonoBehaviour
 
     public void PlayAudio()
     {
+        animator.SetTrigger("Clicked");
+
         AudioSource audioSource = GetComponent<AudioSource>();
 
         if(audioSource == null)

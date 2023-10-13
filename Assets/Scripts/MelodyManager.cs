@@ -6,7 +6,10 @@ public class MelodyManager : MonoBehaviour
     public static MelodyManager Instance;
 
     [SerializeField]
-    public List<MelodyNote> currentOrder = new List<MelodyNote>(); // List of PuzzlePiece objects.
+    public List<MelodyNote> currentOrder = new List<MelodyNote>
+    {
+
+    }; // List of PuzzlePiece objects.
 
     public List<MelodyNote> solutionOrder = new List<MelodyNote>
     {
