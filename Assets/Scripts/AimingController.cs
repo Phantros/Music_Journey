@@ -6,16 +6,21 @@ using TMPro;
 
 public class AimingController : MonoBehaviour
 {
+    public LayerMask interactableLayer; // The layer containing interactable objects.
+    public LayerMask highlightLayer; //The layer containing the highlight shader.
     public GameObject crosshair; // Reference to your crosshair UI element.
     public MelodyManager melodyManager;
     public AudioManager audioManager;
     public List<Collider> flowerPotsColliders;
     public TextMeshProUGUI textMeshPro;
     public Canvas signCanvas;
+<<<<<<< Updated upstream
     public AudioClip liftPotClip;
 
     private AudioSource audioSource;
     private new ParticleSystem particleSystem;
+=======
+>>>>>>> Stashed changes
     private Transform currentAimedObject; // The currently aimed-at object (if any).
     private Transform firstAimedObject; // The first object the player aims at.
     private Transform secondAimedObject; // The second object the player aims at.
@@ -23,7 +28,7 @@ public class AimingController : MonoBehaviour
     private List<Transform> raisedObjects = new List<Transform>();
     private Transform lastAimedObject;
     private Collider lastAimedCollider;
-
+    private Keyboard keyboard;
 
     // Enum to represent the state of an object.
     private enum ObjectState
@@ -36,15 +41,10 @@ public class AimingController : MonoBehaviour
     }
 
     private Dictionary<Transform, ObjectState> objectStates = new Dictionary<Transform, ObjectState>();
-    
+
     private void Start()
     {
-        // Add an AudioSource component if one doesn't exist.
-        audioSource = gameObject.GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
+        keyboard = Keyboard.current;
     }
 
     private void Update()
@@ -61,19 +61,28 @@ public class AimingController : MonoBehaviour
             // Store the currently aimed-at object
             currentAimedObject = hit.transform;
             lastAimedCollider = hit.collider;
+            Debug.Log("curret aimed at object is: " + currentAimedObject.name);
+            Debug.Log("last aimed at collider is: " + lastAimedCollider.name);
 
             // Make the crosshair change color or appearance to indicate targeting
             crosshair.transform.localScale = Vector3.one * 1.2f;
+
+            //SetLayerRecursively(hit.collider.gameObject, "Highlight");
 
             if (currentAimedObject != lastAimedObject)
             {
                 lastAimedObject = currentAimedObject;
             }
-
-            if (currentAimedObject.CompareTag("HighLightAble"))
+             
+            if(currentAimedObject.name == "Tutorial")
             {
                 SetLayerRecursively(currentAimedObject.gameObject, "Highlight");
             }
+            //For later
+            /*if(keyboard.qKey.wasPressedThisFrame)
+            {
+                audioManager.PlayCurrentMelody(0.3f);
+            }*/
 
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {
@@ -81,6 +90,8 @@ public class AimingController : MonoBehaviour
                 {
                     if (currentAimedObject.name == "Tutorial")
                     {
+                        audioManager.PlaySolutionMelody(0.5f);
+
                         if (signCanvas.gameObject.activeSelf == false)
                         {
                             signCanvas.gameObject.SetActive(true);
@@ -89,20 +100,11 @@ public class AimingController : MonoBehaviour
                         {
                             signCanvas.gameObject.SetActive(false);
                         }
-                    }
-
-                    if (currentAimedObject.name == "Bird_Solution_Melody")
-                    {
-                        audioManager.PlaySolutionMelody(0.3f);
-                    }
-
-                    if (currentAimedObject.name == "Bird_My_Melody")
-                    {
-                        audioManager.PlayCurrentMelody(0.3f);
 
                         if (melodyManager.IsPuzzleSolved())
                         {
                             textMeshPro.gameObject.SetActive(true);
+                            Debug.Log("Solved");
                         }
                     }
 
@@ -121,10 +123,6 @@ public class AimingController : MonoBehaviour
                                 // If the player clicks on a lowered MelodyNote object, raise it.
                                 RaiseObjectGradually(currentAimedObject);
                                 objectStates[currentAimedObject] = ObjectState.Raising;
-                                particleSystem = currentAimedObject.GetComponentInChildren<ParticleSystem>();
-                                particleSystem.Play();
-                                audioSource.clip = liftPotClip;
-                                audioSource.Play();
                                 break;
                             case ObjectState.Raising:
                                 // Object is already raising, do nothing.
@@ -156,7 +154,7 @@ public class AimingController : MonoBehaviour
             if (lastAimedObject != null)
             {
                 //lastHitCollider.gameObject.layer = interactableMask;
-                SetLayerRecursively(lastAimedObject.gameObject, "Interactable");
+                SetLayerRecursively(lastAimedObject.gameObject, "Interactable"); 
                 lastAimedObject = null;
             }
         }
@@ -208,13 +206,8 @@ public class AimingController : MonoBehaviour
             // When secondAimedObject is raised, swap pieces and interpolate positions.
             if (objectStates[secondAimedObject] == ObjectState.Raised)
             {
-                int indexA = firstAimedObject.GetComponent<MelodyNote>().index;
-
-                Debug.Log("Index A = " + indexA);
-
-                int indexB = secondAimedObject.GetComponent<MelodyNote>().index;
-
-                Debug.Log("Index B = " + indexB);
+                int indexA = firstAimedObject.GetComponent<MelodyNote>().Index;
+                int indexB = secondAimedObject.GetComponent<MelodyNote>().Index;
                 melodyManager.SwapPieces(indexA, indexB);
 
                 // Interpolate positions between firstAimedObject and secondAimedObject.

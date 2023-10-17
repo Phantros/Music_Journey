@@ -4,19 +4,15 @@ using UnityEngine.InputSystem; // Import the InputSystem namespace
 
 public class MelodyNote : MonoBehaviour
 {
-    public int index;
+    public int Index;
     public AudioClip melodyClip;
-
     public Collider flowerCollider;// Reference to the MP3 audio clip.
-    public List<GameObject> melodyBobbingNotes;
+    public List<GameObject> melodyNotes;
 
-    private Animator animator;
     private AudioSource audioSource;
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
-
         // Add an AudioSource component if one doesn't exist.
         audioSource = gameObject.GetComponent<AudioSource>();
         if (audioSource == null)
@@ -41,12 +37,18 @@ public class MelodyNote : MonoBehaviour
                 {
                     if (hit.collider == flowerCollider)
                     {
-                        animator.SetTrigger("Clicked");
-
                         // Play the assigned audio clip.
+                        AudioSource audioSource = GetComponent<AudioSource>();
+                        if (audioSource == null)
+                        {
+                            // Add an AudioSource component if one doesn't exist.
+                            audioSource = gameObject.AddComponent<AudioSource>();
+                        }
+
+
                         audioSource.clip = melodyClip;
                         audioSource.Play();
-                        foreach (GameObject bobbingNotes in melodyBobbingNotes)
+                        foreach (GameObject bobbingNotes in melodyNotes)
                         {
                             bobbingNotes.SetActive(true);
                         }
@@ -56,12 +58,12 @@ public class MelodyNote : MonoBehaviour
         }
         else
         {
-            return;
+            Debug.LogWarning("No audio clip assigned to MelodyNote.");
         }
 
         if(audioSource.isPlaying == false)
         {
-            foreach (GameObject bobbingNotes in melodyBobbingNotes)
+            foreach (GameObject bobbingNotes in melodyNotes)
             {
                 bobbingNotes.SetActive(false);
             }
@@ -70,14 +72,19 @@ public class MelodyNote : MonoBehaviour
 
     public void PlayAudio()
     {
-        animator.SetTrigger("Clicked");
+        AudioSource audioSource = GetComponent<AudioSource>();
+
+        if(audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>(); 
+        }
 
         if(melodyClip != null && audioSource != null)
         {
             audioSource.clip = melodyClip;
             audioSource.Play();
 
-            foreach (GameObject bobbingNotes in melodyBobbingNotes)
+            foreach (GameObject bobbingNotes in melodyNotes)
             {
                 bobbingNotes.SetActive(true);
             }
