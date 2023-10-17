@@ -193,7 +193,7 @@ public class AimingController : MonoBehaviour
         float startTime = Time.time;
         Vector3 initialPosition = obj.position;
         Vector3 raisedPosition = initialPosition + Vector3.up * raiseAmount;
-
+        particleSystem.Play();
         while (Time.time - startTime < duration)
         {
             float t = (Time.time - startTime) / duration;
