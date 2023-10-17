@@ -14,7 +14,6 @@ public class AudioManager : MonoBehaviour
         // Check if the PlayMelody coroutine is already running
         if (isPlayingMelody)
         {
-            Debug.Log("PlayMelody is already running. Skipping.");
             return;
         }
 
@@ -25,12 +24,13 @@ public class AudioManager : MonoBehaviour
     {
         isPlayingMelody = true;
 
-        foreach (MelodyNote melodyNote in melodyManager.currentOrder)
+        foreach (MelodyNote melodyNote in melodyManager.GetCurrentOrder())
         {
             if (melodyNote != null)
             {
                 // Play the audio clip associated with the MelodyNote.
                 melodyNote.PlayAudio();
+                Debug.Log(melodyNote.name + "NAME");
 
                 yield return new WaitForSeconds(delay);
             }
@@ -44,7 +44,6 @@ public class AudioManager : MonoBehaviour
         // Check if the PlayMelody coroutine is already running
         if (isPlayingMelody)
         {
-            Debug.Log("PlayMelody is already running. Skipping.");
             return;
         }
 
@@ -61,6 +60,7 @@ public class AudioManager : MonoBehaviour
             {
                 // Play the audio clip associated with the MelodyNote.
                 melodyNote.PlayAudio();
+                Debug.Log(melodyNote.name + "NAME");
 
                 yield return new WaitForSeconds(delay);
             }
