@@ -35,6 +35,7 @@ public class LayerSwitch : MonoBehaviour
                 // Change the layer of the first child object
                 SetLayerRecursively(hit.collider.gameObject, "Highlight");
                 SetLayerRecursively(pot.gameObject, "Interactable");
+                pot.gameObject.layer = originalLayer2; // Revert the second child's layer
                 lastHitCollider = flowerCollider;
             }
             else if (hit.collider == potCollider)
@@ -42,6 +43,7 @@ public class LayerSwitch : MonoBehaviour
                 // Change the layer of the second child object
                 SetLayerRecursively(hit.collider.gameObject, "Highlight");
                 SetLayerRecursively(flower.gameObject, "Interactable");
+                flower.gameObject.layer = originalLayer1; // Revert the first child's layer
                 lastHitCollider = potCollider;
             }
             else
