@@ -121,6 +121,7 @@ public class AimingController : MonoBehaviour
                                 {
                                     birdConvoAnim.SetBool("Solved", false);
                                     birdConvoAnim.SetTrigger("SecondClick");
+                                    audioManager.PlayCurrentMelody(0.3f);
                                     birdClick = 1;
                                 }
                                 else

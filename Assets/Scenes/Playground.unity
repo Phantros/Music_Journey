@@ -496,6 +496,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 9298611c86b3707499490f18e325ba7e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1168c4af83f591543884848546483a9f, type: 2}
     - target: {fileID: 919132149155446097, guid: 9298611c86b3707499490f18e325ba7e,
         type: 3}
       propertyPath: m_Name
@@ -1166,7 +1171,7 @@ Transform:
   - {fileID: 759332584}
   - {fileID: 473973644}
   m_Father: {fileID: 997885908}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &141461876 stripped
 Transform:
@@ -1424,7 +1429,7 @@ Transform:
   - {fileID: 355478309}
   - {fileID: 848409272}
   m_Father: {fileID: 997885908}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &232469946 stripped
 Transform:
@@ -7608,16 +7613,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 450211851}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -33.589527, y: 0.68176305, z: 24.93076}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2054577492}
   - {fileID: 265417709}
   - {fileID: 5944034679556446682}
-  m_Father: {fileID: 997885908}
-  m_RootOrder: 0
+  m_Father: {fileID: 959344006}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &455492132 stripped
 GameObject:
@@ -15298,6 +15303,7 @@ Transform:
   - {fileID: 895564309}
   - {fileID: 1040853546}
   - {fileID: 689886468}
+  - {fileID: 450211852}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15355,7 +15361,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 450211852}
   - {fileID: 137074336}
   - {fileID: 201248555}
   m_Father: {fileID: 0}
@@ -15523,6 +15528,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 9298611c86b3707499490f18e325ba7e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1168c4af83f591543884848546483a9f, type: 2}
     - target: {fileID: 919132149155446097, guid: 9298611c86b3707499490f18e325ba7e,
         type: 3}
       propertyPath: m_Name
@@ -17019,7 +17029,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 58cedfbf4193a3a4a84206308601c28e, type: 2}
+  - {fileID: 2100000, guid: b6a0ae2624a601a41863cc9534322cfb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -30467,7 +30477,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ik wou dat ik die melodie ook kon zingen!
+  m_text: Ik wou dat ik dezelfde melodie als zij kan zingen!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -41668,7 +41678,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 58cedfbf4193a3a4a84206308601c28e, type: 2}
+  - {fileID: 2100000, guid: b6a0ae2624a601a41863cc9534322cfb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
