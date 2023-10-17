@@ -6,8 +6,6 @@ using TMPro;
 
 public class AimingController : MonoBehaviour
 {
-    public LayerMask interactableLayer; // The layer containing interactable objects.
-    public LayerMask highlightLayer; //The layer containing the highlight shader.
     public GameObject crosshair; // Reference to your crosshair UI element.
     public MelodyManager melodyManager;
     public AudioManager audioManager;
@@ -16,9 +14,10 @@ public class AimingController : MonoBehaviour
     public Canvas signCanvas;
     public AudioClip liftPotClip;
     public AudioClip swapPotsClip;
+    public Animator birdConvoAnim;
 
     private AudioSource audioSource;
-    private new ParticleSystem particleSystem;
+    //private new ParticleSystem particleSystem;
     private Transform currentAimedObject; // The currently aimed-at object (if any).
     private Transform firstAimedObject; // The first object the player aims at.
     private Transform secondAimedObject; // The second object the player aims at.
@@ -26,7 +25,7 @@ public class AimingController : MonoBehaviour
     private List<Transform> raisedObjects = new List<Transform>();
     private Transform lastAimedObject;
     private Collider lastAimedCollider;
-    private Keyboard keyboard;
+    private int birdClick = 0;
 
     // Enum to represent the state of an object.
     private enum ObjectState
@@ -42,9 +41,16 @@ public class AimingController : MonoBehaviour
 
     private void Start()
     {
-        keyboard = Keyboard.current;
-    }
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
 
+        else
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+    }
     private void Update()
     {
         // Create a ray from the center of the screen
@@ -59,28 +65,19 @@ public class AimingController : MonoBehaviour
             // Store the currently aimed-at object
             currentAimedObject = hit.transform;
             lastAimedCollider = hit.collider;
-            Debug.Log("curret aimed at object is: " + currentAimedObject.name);
-            Debug.Log("last aimed at collider is: " + lastAimedCollider.name);
 
             // Make the crosshair change color or appearance to indicate targeting
             crosshair.transform.localScale = Vector3.one * 1.2f;
-
-            //SetLayerRecursively(hit.collider.gameObject, "Highlight");
 
             if (currentAimedObject != lastAimedObject)
             {
                 lastAimedObject = currentAimedObject;
             }
-             
-            if(currentAimedObject.name == "Tutorial")
+
+            if (currentAimedObject.CompareTag("HighLightAble"))
             {
                 SetLayerRecursively(currentAimedObject.gameObject, "Highlight");
             }
-            //For later
-            /*if(keyboard.qKey.wasPressedThisFrame)
-            {
-                audioManager.PlayCurrentMelody(0.3f);
-            }*/
 
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {
@@ -98,12 +95,33 @@ public class AimingController : MonoBehaviour
                         {
                             signCanvas.gameObject.SetActive(false);
                         }
+                    }
 
-                        if (melodyManager.IsPuzzleSolved())
+                    if (currentAimedObject.name == "Bird_My_Melody")
+                    {
+
+                        switch (birdClick)
                         {
-                            textMeshPro.gameObject.SetActive(true);
-                            Debug.Log("Solved");
+                            case 0:
+                                birdConvoAnim.SetTrigger("FirstClick");
+                                birdClick++;
+                                break;
+                            case 1:
+                                if (!melodyManager.IsPuzzleSolved())
+                                {
+                                    birdConvoAnim.SetBool("Solved", false);
+                                    birdConvoAnim.SetTrigger("SecondClick");
+                                    birdClick = 1;
+                                }
+                                else
+                                {
+                                    birdConvoAnim.SetBool("Solved", true);
+                                    birdConvoAnim.SetTrigger("SecondClick");
+                                    birdClick = 1;
+                                }
+                                break;
                         }
+
                     }
 
                     if (lastAimedCollider != null & flowerPotsColliders.Contains(lastAimedCollider))
@@ -152,7 +170,7 @@ public class AimingController : MonoBehaviour
             if (lastAimedObject != null)
             {
                 //lastHitCollider.gameObject.layer = interactableMask;
-                SetLayerRecursively(lastAimedObject.gameObject, "Interactable"); 
+                SetLayerRecursively(lastAimedObject.gameObject, "Interactable");
                 lastAimedObject = null;
             }
         }
@@ -188,7 +206,19 @@ public class AimingController : MonoBehaviour
         float startTime = Time.time;
         Vector3 initialPosition = obj.position;
         Vector3 raisedPosition = initialPosition + Vector3.up * raiseAmount;
-        particleSystem.Play();
+
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.clip = liftPotClip;
+        audioSource.Play();
+
+        ParticleSystem potParticles = currentAimedObject.GetComponentInChildren<ParticleSystem>();
+        
+
+        if (potParticles != null)
+        {
+            potParticles.Play();
+        }
+
         while (Time.time - startTime < duration)
         {
             float t = (Time.time - startTime) / duration;

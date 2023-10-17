@@ -38,6 +38,9 @@ public class MelodyManager : MonoBehaviour
         MelodyNote temp = currentOrder[indexA];
         currentOrder[indexA] = currentOrder[indexB];
         currentOrder[indexB] = temp;
+
+        currentOrder[indexA].Index = indexB;
+        currentOrder[indexB].Index = indexA;
     }
 
     public bool IsPuzzleSolved()
