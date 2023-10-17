@@ -902,12 +902,9 @@ BoxCollider:
   m_Size: {x: 0.001131329, y: 0.0016346562, z: 0.0016485826}
   m_Center: {x: -0.00002930367, y: -0.000047146368, z: 0.0008242256}
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 >>>>>>> Stashed changes
 =======
-=======
->>>>>>> parent of 6891a32 (Revert "Animations for bird text interaction")
 --- !u!1 &304945261
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,9 +981,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304945261}
   m_CullTransparentMesh: 1
-<<<<<<< HEAD
->>>>>>> parent of 6891a32 (Revert "Animations for bird text interaction")
-=======
 >>>>>>> parent of 6891a32 (Revert "Animations for bird text interaction")
 --- !u!1001 &307915725
 PrefabInstance:
@@ -4058,15 +4052,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
 <<<<<<< HEAD
-<<<<<<< HEAD
 <<<<<<< Updated upstream
       value: -16.9
 =======
       value: -15.02
 >>>>>>> Stashed changes
-=======
-      value: -18.87
->>>>>>> parent of 6891a32 (Revert "Animations for bird text interaction")
 =======
       value: -18.87
 >>>>>>> parent of 6891a32 (Revert "Animations for bird text interaction")
@@ -4611,15 +4601,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
 <<<<<<< HEAD
-<<<<<<< HEAD
 <<<<<<< Updated upstream
       value: -16.9
 =======
       value: -15.02
 >>>>>>> Stashed changes
-=======
-      value: -18.87
->>>>>>> parent of 6891a32 (Revert "Animations for bird text interaction")
 =======
       value: -18.87
 >>>>>>> parent of 6891a32 (Revert "Animations for bird text interaction")
@@ -6245,15 +6231,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
 <<<<<<< HEAD
-<<<<<<< HEAD
 <<<<<<< Updated upstream
       value: -17.9
 =======
       value: -16.02
 >>>>>>> Stashed changes
-=======
-      value: -19.87
->>>>>>> parent of 6891a32 (Revert "Animations for bird text interaction")
 =======
       value: -19.87
 >>>>>>> parent of 6891a32 (Revert "Animations for bird text interaction")
