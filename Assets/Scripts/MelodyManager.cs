@@ -6,9 +6,12 @@ public class MelodyManager : MonoBehaviour
     public static MelodyManager Instance;
 
     [SerializeField]
-    public List<MelodyNote> currentOrder = new List<MelodyNote>();
+    public List<MelodyNote> currentOrder = new List<MelodyNote>(); // List of PuzzlePiece objects.
 
-    public List<MelodyNote> solutionOrder = new List<MelodyNote>();
+    public List<MelodyNote> solutionOrder = new List<MelodyNote>
+    {
+        
+    };
 
     private void Awake()
     {
@@ -35,15 +38,6 @@ public class MelodyManager : MonoBehaviour
         MelodyNote temp = currentOrder[indexA];
         currentOrder[indexA] = currentOrder[indexB];
         currentOrder[indexB] = temp;
-
-        // Update the MelodyNote component indices.
-        currentOrder[indexA].index = indexA;
-        currentOrder[indexB].index = indexB;
-
-        for (int i = 0; i < currentOrder.Count; i++)
-        {
-            Debug.Log("Order: " + currentOrder[i]);
-        }
     }
 
     public bool IsPuzzleSolved()
