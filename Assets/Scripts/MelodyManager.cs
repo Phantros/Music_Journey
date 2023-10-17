@@ -39,8 +39,8 @@ public class MelodyManager : MonoBehaviour
         currentOrder[indexA] = currentOrder[indexB];
         currentOrder[indexB] = temp;
 
-        currentOrder[indexA].Index = indexB;
-        currentOrder[indexB].Index = indexA;
+        currentOrder[indexA].index = indexA;
+        currentOrder[indexB].index = indexB;
     }
 
     public bool IsPuzzleSolved()
@@ -59,6 +59,7 @@ public class MelodyManager : MonoBehaviour
             }
         }
 
+        Debug.Log("Puzzle solved in Melody Manager");
         return true;
     }
     

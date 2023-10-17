@@ -16,8 +16,8 @@ public class AimingController : MonoBehaviour
     public AudioClip swapPotsClip;
     public Animator birdConvoAnim;
 
+
     private AudioSource audioSource;
-    //private new ParticleSystem particleSystem;
     private Transform currentAimedObject; // The currently aimed-at object (if any).
     private Transform firstAimedObject; // The first object the player aims at.
     private Transform secondAimedObject; // The second object the player aims at.
@@ -103,9 +103,18 @@ public class AimingController : MonoBehaviour
                         switch (birdClick)
                         {
                             case 0:
-                                birdConvoAnim.SetTrigger("FirstClick");
-                                birdClick++;
-                                break;
+                                if (melodyManager.IsPuzzleSolved())
+                                {
+                                    birdConvoAnim.SetBool("QuickSolve", true);
+                                    audioManager.PlaySolutionMelody(0.3f);
+                                }
+                                else
+                                {
+                                    birdConvoAnim.SetBool("QuickSolve", false);
+                                }
+                                    birdConvoAnim.SetTrigger("FirstClick");
+                                    birdClick++;
+                                    break;
                             case 1:
                                 if (!melodyManager.IsPuzzleSolved())
                                 {
@@ -117,11 +126,16 @@ public class AimingController : MonoBehaviour
                                 {
                                     birdConvoAnim.SetBool("Solved", true);
                                     birdConvoAnim.SetTrigger("SecondClick");
+                                    audioManager.PlaySolutionMelody(0.3f);
                                     birdClick = 1;
                                 }
                                 break;
                         }
+                    }
 
+                    if (currentAimedObject.name == "Bird_Solution_Melody")
+                    {
+                        audioManager.PlaySolutionMelody(0.3f);
                     }
 
                     if (lastAimedCollider != null & flowerPotsColliders.Contains(lastAimedCollider))
@@ -189,7 +203,6 @@ public class AimingController : MonoBehaviour
     private IEnumerator PlaySwapSound()
     {
         yield return new WaitForSeconds(0.3f);
-        Debug.Log("Got here");
         audioSource.clip = swapPotsClip;
         audioSource.Play();
     }
@@ -207,12 +220,12 @@ public class AimingController : MonoBehaviour
         Vector3 initialPosition = obj.position;
         Vector3 raisedPosition = initialPosition + Vector3.up * raiseAmount;
 
-        AudioSource audioSource = GetComponent<AudioSource>();
+        //AudioSource audioSource = GetComponent<AudioSource>();
         audioSource.clip = liftPotClip;
         audioSource.Play();
 
         ParticleSystem potParticles = currentAimedObject.GetComponentInChildren<ParticleSystem>();
-        
+
 
         if (potParticles != null)
         {
@@ -235,15 +248,18 @@ public class AimingController : MonoBehaviour
         {
             firstAimedObject = obj;
         }
+
         else if (secondAimedObject == null)
         {
             secondAimedObject = obj;
             // When secondAimedObject is raised, swap pieces and interpolate positions.
             if (objectStates[secondAimedObject] == ObjectState.Raised)
             {
-                int indexA = firstAimedObject.GetComponent<MelodyNote>().Index;
-                int indexB = secondAimedObject.GetComponent<MelodyNote>().Index;
+                int indexA = firstAimedObject.GetComponent<MelodyNote>().index;
+                int indexB = secondAimedObject.GetComponent<MelodyNote>().index;
                 melodyManager.SwapPieces(indexA, indexB);
+
+                Debug.Log("A" + indexA + "B" + indexB);
 
                 // Interpolate positions between firstAimedObject and secondAimedObject.
                 StartCoroutine(InterpolateObjectPositions(firstAimedObject, secondAimedObject));

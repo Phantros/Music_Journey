@@ -32,7 +32,6 @@ public class LayerSwitch : MonoBehaviour
         {
             if (hit.collider == flowerCollider)
             {
-                Debug.Log("hit flower");
                 // Change the layer of the first child object
                 SetLayerRecursively(hit.collider.gameObject, "Highlight");
                 SetLayerRecursively(pot.gameObject, "Interactable");
@@ -40,7 +39,6 @@ public class LayerSwitch : MonoBehaviour
             }
             else if (hit.collider == potCollider)
             {
-                Debug.Log("hit pot");
                 // Change the layer of the second child object
                 SetLayerRecursively(hit.collider.gameObject, "Highlight");
                 SetLayerRecursively(flower.gameObject, "Interactable");

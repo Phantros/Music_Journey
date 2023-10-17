@@ -4,9 +4,10 @@ using UnityEngine.InputSystem; // Import the InputSystem namespace
 
 public class MelodyNote : MonoBehaviour
 {
-    public int Index;
+    public int index;
     public AudioClip melodyClip;
     public Collider flowerCollider;// Reference to the MP3 audio clip.
+    public Animator flowerAnim;
     public List<GameObject> melodyNotes;
 
     private AudioSource audioSource;
@@ -45,6 +46,7 @@ public class MelodyNote : MonoBehaviour
                             audioSource = gameObject.AddComponent<AudioSource>();
                         }
 
+                        flowerAnim.SetTrigger("Clicked");
 
                         audioSource.clip = melodyClip;
                         audioSource.Play();
