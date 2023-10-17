@@ -15,7 +15,7 @@ public class AimingController : MonoBehaviour
     public AudioClip liftPotClip;
     public AudioClip swapPotsClip;
     public Animator birdConvoAnim;
-
+    public ParticleSystem solvedParticles;
 
     private AudioSource audioSource;
     private Transform currentAimedObject; // The currently aimed-at object (if any).
@@ -107,6 +107,7 @@ public class AimingController : MonoBehaviour
                                 {
                                     birdConvoAnim.SetBool("QuickSolve", true);
                                     audioManager.PlaySolutionMelody(0.3f);
+                                    solvedParticles.Play();
                                 }
                                 else
                                 {
@@ -127,6 +128,7 @@ public class AimingController : MonoBehaviour
                                     birdConvoAnim.SetBool("Solved", true);
                                     birdConvoAnim.SetTrigger("SecondClick");
                                     audioManager.PlaySolutionMelody(0.3f);
+                                    solvedParticles.Play();
                                     birdClick = 1;
                                 }
                                 break;
