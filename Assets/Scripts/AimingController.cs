@@ -13,6 +13,7 @@ public class AimingController : MonoBehaviour
     public TextMeshProUGUI textMeshPro;
     public Canvas signCanvas;
     public AudioClip liftPotClip;
+    public AudioClip swapPotsClip;
 
     private AudioSource audioSource;
     private new ParticleSystem particleSystem;
@@ -135,7 +136,7 @@ public class AimingController : MonoBehaviour
                                 objectStates[currentAimedObject] = ObjectState.Lowering;
                                 break;
                             case ObjectState.Swapping:
-                                // Object is currently swapping, do nothing.
+                                //Objects are swapping, do nothing.
                                 break;
                             case ObjectState.Lowering:
                                 // Object is already lowering, do nothing.
@@ -172,6 +173,13 @@ public class AimingController : MonoBehaviour
         }
     }
 
+    private IEnumerator PlaySwapSound()
+    {
+        yield return new WaitForSeconds(0.3f);
+        Debug.Log("Got here");
+        audioSource.clip = swapPotsClip;
+        audioSource.Play();
+    }
     // Coroutine to gradually raise an object.
     private IEnumerator RaiseObjectCoroutine(Transform obj)
     {
@@ -276,6 +284,8 @@ public class AimingController : MonoBehaviour
         Vector3 initialPositionA = objA.position;
         Vector3 initialPositionB = objB.position;
 
+        StartCoroutine(PlaySwapSound());
+
         while (Time.time - startTime < duration)
         {
             float t = (Time.time - startTime) / duration;
@@ -286,6 +296,7 @@ public class AimingController : MonoBehaviour
 
         objA.position = initialPositionB; // Set final positions.
         objB.position = initialPositionA;
+
 
         // Lower both objects back down to the lowered state.
         LowerObjectGradually(objA);
