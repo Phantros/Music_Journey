@@ -14,14 +14,11 @@ public class AimingController : MonoBehaviour
     public List<Collider> flowerPotsColliders;
     public TextMeshProUGUI textMeshPro;
     public Canvas signCanvas;
-<<<<<<< Updated upstream
     public AudioClip liftPotClip;
     public AudioClip swapPotsClip;
 
     private AudioSource audioSource;
     private new ParticleSystem particleSystem;
-=======
->>>>>>> Stashed changes
     private Transform currentAimedObject; // The currently aimed-at object (if any).
     private Transform firstAimedObject; // The first object the player aims at.
     private Transform secondAimedObject; // The second object the player aims at.
@@ -191,7 +188,7 @@ public class AimingController : MonoBehaviour
         float startTime = Time.time;
         Vector3 initialPosition = obj.position;
         Vector3 raisedPosition = initialPosition + Vector3.up * raiseAmount;
-
+        particleSystem.Play();
         while (Time.time - startTime < duration)
         {
             float t = (Time.time - startTime) / duration;
