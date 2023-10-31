@@ -14,7 +14,6 @@ public class AudioManager : MonoBehaviour
         // Check if the PlayMelody coroutine is already running
         if (isPlayingMelody)
         {
-            Debug.Log("PlayMelody is already running. Skipping.");
             return;
         }
 
@@ -44,7 +43,6 @@ public class AudioManager : MonoBehaviour
         // Check if the PlayMelody coroutine is already running
         if (isPlayingMelody)
         {
-            Debug.Log("PlayMelody is already running. Skipping.");
             return;
         }
 

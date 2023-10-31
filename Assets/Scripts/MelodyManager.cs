@@ -59,7 +59,6 @@ public class MelodyManager : MonoBehaviour
             }
         }
 
-        Debug.Log("Puzzle solved in Melody Manager");
         return true;
     }
     

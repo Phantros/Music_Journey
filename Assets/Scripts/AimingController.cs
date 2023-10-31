@@ -2,11 +2,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using TMPro;
 
 public class AimingController : MonoBehaviour
 {
-    public GameObject crosshair; // Reference to your crosshair UI element.
+    public GameObject crosshair; 
     public MelodyManager melodyManager;
     public AudioManager audioManager;
     public List<Collider> flowerPotsColliders;
@@ -14,8 +15,11 @@ public class AimingController : MonoBehaviour
     public Canvas signCanvas;
     public AudioClip liftPotClip;
     public AudioClip swapPotsClip;
-    public Animator birdConvoAnim;
-    public ParticleSystem solvedParticles;
+    //public AudioClip openDoorsClip;
+    //public Animator birdConvoAnim;
+    //public Animator doorAnimator;
+    //public ParticleSystem solvedParticles;
+
 
     private AudioSource audioSource;
     private Transform currentAimedObject; // The currently aimed-at object (if any).
@@ -25,7 +29,7 @@ public class AimingController : MonoBehaviour
     private List<Transform> raisedObjects = new List<Transform>();
     private Transform lastAimedObject;
     private Collider lastAimedCollider;
-    private int birdClick = 0;
+    //private int birdClick = 0;
 
     // Enum to represent the state of an object.
     private enum ObjectState
@@ -71,33 +75,37 @@ public class AimingController : MonoBehaviour
 
             if (currentAimedObject != lastAimedObject)
             {
-                lastAimedObject = currentAimedObject;
-            }
+                if (lastAimedObject != null)
+                {
+                    SetLayerRecursively(lastAimedObject.gameObject, "Interactable");
+                }
 
-            if (currentAimedObject.CompareTag("HighLightAble"))
-            {
-                SetLayerRecursively(currentAimedObject.gameObject, "Highlight");
+                lastAimedObject = currentAimedObject;
             }
 
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {
                 if (currentAimedObject != null)
                 {
-                    if (currentAimedObject.name == "Tutorial")
+                    if (objectStates.ContainsKey(currentAimedObject))
                     {
-                        audioManager.PlaySolutionMelody(0.5f);
+                        ObjectState objectState = objectStates[currentAimedObject];
 
-                        if (signCanvas.gameObject.activeSelf == false)
+                        if (objectState == ObjectState.Swapping ||
+                            objectState == ObjectState.Lowering ||
+                            objectState == ObjectState.Raising)
                         {
-                            signCanvas.gameObject.SetActive(true);
-                        }
-                        else
-                        {
-                            signCanvas.gameObject.SetActive(false);
+                            // If the current object is in the "Swapping" state, do not allow interaction.
+                            return;
                         }
                     }
 
-                    if (currentAimedObject.name == "Bird_My_Melody")
+                    if (currentAimedObject.name == "Tutorial")
+                    {
+                        signCanvas.gameObject.SetActive(signCanvas.gameObject.activeSelf ? false : true);
+                    }
+
+                    /*if (currentAimedObject.name == "Bird_My_Melody")
                     {
 
                         switch (birdClick)
@@ -108,6 +116,8 @@ public class AimingController : MonoBehaviour
                                     birdConvoAnim.SetBool("QuickSolve", true);
                                     audioManager.PlaySolutionMelody(0.3f);
                                     solvedParticles.Play();
+                                    doorAnimator.SetBool("PuzzleSolved", true);
+                                    PlayDoorSound();
                                 }
                                 else
                                 {
@@ -130,11 +140,13 @@ public class AimingController : MonoBehaviour
                                     birdConvoAnim.SetTrigger("SecondClick");
                                     audioManager.PlaySolutionMelody(0.3f);
                                     solvedParticles.Play();
+                                    PlayDoorSound();
+                                    doorAnimator.SetBool("PuzzleSolved", true);
                                     birdClick = 1;
                                 }
                                 break;
                         }
-                    }
+                    }*/
 
                     if (currentAimedObject.name == "Bird_Solution_Melody")
                     {
@@ -186,7 +198,6 @@ public class AimingController : MonoBehaviour
 
             if (lastAimedObject != null)
             {
-                //lastHitCollider.gameObject.layer = interactableMask;
                 SetLayerRecursively(lastAimedObject.gameObject, "Interactable");
                 lastAimedObject = null;
             }

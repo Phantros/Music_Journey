@@ -30,6 +30,11 @@ public class LayerSwitch : MonoBehaviour
         // Perform the raycast
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
+            if (hit.collider.gameObject.CompareTag("HighLightAble"))
+            {
+                SetLayerRecursively(hit.collider.gameObject, "Highlight");
+            }
+
             if (hit.collider == flowerCollider)
             {
                 // Change the layer of the first child object
