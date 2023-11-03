@@ -3,67 +3,41 @@ using System.Collections.Generic;
 
 public class MelodyManager : MonoBehaviour
 {
-    public static MelodyManager Instance;
+    private MelodyPuzzle currentPuzzle;
 
-    [SerializeField]
-    public List<MelodyNote> currentOrder = new List<MelodyNote>(); // List of PuzzlePiece objects.
-
-    public List<MelodyNote> solutionOrder = new List<MelodyNote>
+    public void SetCurrentPuzzle(MelodyPuzzle puzzle)
     {
-        
-    };
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        currentPuzzle = puzzle;
     }
 
     public void SwapPieces(int indexA, int indexB)
     {
-        // Check if the indices are valid.
-        if (indexA < 0 || indexA >= currentOrder.Count || indexB < 0 || indexB >= currentOrder.Count)
+        if (currentPuzzle != null)
         {
-            Debug.LogError("Invalid indices for swapping.");
-            return;
+            currentPuzzle.SwapPieces(indexA, indexB);
         }
-
-        // Swap the puzzle pieces in the current order list.
-        MelodyNote temp = currentOrder[indexA];
-        currentOrder[indexA] = currentOrder[indexB];
-        currentOrder[indexB] = temp;
-
-        currentOrder[indexA].index = indexA;
-        currentOrder[indexB].index = indexB;
     }
 
     public bool IsPuzzleSolved()
     {
-        // Check if the current order matches the solution order.
-        if (currentOrder.Count != solutionOrder.Count)
-        {
-            return false;
-        }
-
-        for (int i = 0; i < currentOrder.Count; i++)
-        {
-            if (currentOrder[i] != solutionOrder[i])
-            {
-                return false;
-            }
-        }
-
-        return true;
+        return currentPuzzle != null && currentPuzzle.IsPuzzleSolved();
     }
-    
-    public List<MelodyNote> GetCurrentOrder()
+
+    public MelodyPuzzle CurrentPuzzle()
     {
-        return currentOrder;
+        if(currentPuzzle != null)
+        {
+            return currentPuzzle;
+        }
+
+        return null;
+    }
+
+    public void DebugSolution()
+    {
+        foreach(MelodyNote melodyNote in currentPuzzle.solutionOrder)
+        {
+            Debug.Log(melodyNote);
+        }
     }
 }

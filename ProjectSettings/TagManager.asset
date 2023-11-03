@@ -7,6 +7,7 @@ TagManager:
   - CinemachineTarget
   - Collide
   - HighLightAble
+  - WinTrigger
   layers:
   - Default
   - TransparentFX

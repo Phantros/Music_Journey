@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
-    public MelodyManager melodyManager;
+    public MelodyPuzzle melodyPuzzle;
 
-    private bool isPlayingMelody = false;
+    public bool isPlayingMelody = false;
 
     // Play audio clips from MelodyNotes in the current order.
     public void PlayCurrentMelody(float delay)
@@ -24,7 +24,7 @@ public class AudioManager : MonoBehaviour
     {
         isPlayingMelody = true;
 
-        foreach (MelodyNote melodyNote in melodyManager.currentOrder)
+        foreach (MelodyNote melodyNote in melodyPuzzle.currentOrder)
         {
             if (melodyNote != null)
             {
@@ -53,7 +53,7 @@ public class AudioManager : MonoBehaviour
     {
         isPlayingMelody = true;
 
-        foreach (MelodyNote melodyNote in melodyManager.solutionOrder)
+        foreach (MelodyNote melodyNote in melodyPuzzle.solutionOrder)
         {
             if (melodyNote != null)
             {

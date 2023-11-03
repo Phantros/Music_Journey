@@ -1,14 +1,15 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class BirdBehavior : MonoBehaviour
 {
     public Animator birdConvoAnim;
-    public MelodyManager melodyManager;
     public AudioManager audioManager;
     public ParticleSystem solvedParticles;
     public Animator doorAnimator;
-    public AudioClip openDoorsClip;
+    public AudioClip openDoorsClip, solvedPuzzleClip;
+    public MelodyManager melodyManager;
 
     private AudioSource audioSource;
     private int birdClick = 0;
@@ -53,10 +54,7 @@ public class BirdBehavior : MonoBehaviour
                 if (melodyManager.IsPuzzleSolved())
                 {
                     birdConvoAnim.SetBool("QuickSolve", true);
-                    audioManager.PlaySolutionMelody(0.3f);
-                    solvedParticles.Play();
-                    doorAnimator.SetBool("PuzzleSolved", true);
-                    PlayDoorSound();
+                    StartCoroutine(SolvedPuzzle());
                 }
                 else
                 {
@@ -77,18 +75,34 @@ public class BirdBehavior : MonoBehaviour
                 {
                     birdConvoAnim.SetBool("Solved", true);
                     birdConvoAnim.SetTrigger("SecondClick");
-                    audioManager.PlaySolutionMelody(0.3f);
-                    solvedParticles.Play();
-                    PlayDoorSound();
-                    doorAnimator.SetBool("PuzzleSolved", true);
+                    StartCoroutine(SolvedPuzzle());
                     birdClick = 1;
                 }
                 break;
         }
     }
 
-    private void PlayDoorSound()
+    private IEnumerator SolvedPuzzle()
     {
+        solvedParticles.Play();
+
+        audioManager.PlaySolutionMelody(0.3f);
+        while (audioManager.isPlayingMelody)
+        {
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.2f);
+
+        audioSource.clip = solvedPuzzleClip;
+        audioSource.Play();
+
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
+
+        doorAnimator.SetBool("PuzzleSolved", true);
         audioSource.clip = openDoorsClip;
         audioSource.Play();
     }

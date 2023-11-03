@@ -7,19 +7,16 @@ using TMPro;
 
 public class AimingController : MonoBehaviour
 {
-    public GameObject crosshair; 
-    public MelodyManager melodyManager;
+    public GameObject crosshair;
     public AudioManager audioManager;
     public List<Collider> flowerPotsColliders;
-    public TextMeshProUGUI textMeshPro;
     public Canvas signCanvas;
     public AudioClip liftPotClip;
     public AudioClip swapPotsClip;
-    //public AudioClip openDoorsClip;
-    //public Animator birdConvoAnim;
-    //public Animator doorAnimator;
-    //public ParticleSystem solvedParticles;
-
+    public AudioClip finishedGame;
+    public MelodyManager melodyManager;
+    public List<ParticleSystem> winParticles;
+    public AudioSource finishSource;
 
     private AudioSource audioSource;
     private Transform currentAimedObject; // The currently aimed-at object (if any).
@@ -29,7 +26,6 @@ public class AimingController : MonoBehaviour
     private List<Transform> raisedObjects = new List<Transform>();
     private Transform lastAimedObject;
     private Collider lastAimedCollider;
-    //private int birdClick = 0;
 
     // Enum to represent the state of an object.
     private enum ObjectState
@@ -105,54 +101,6 @@ public class AimingController : MonoBehaviour
                         signCanvas.gameObject.SetActive(signCanvas.gameObject.activeSelf ? false : true);
                     }
 
-                    /*if (currentAimedObject.name == "Bird_My_Melody")
-                    {
-
-                        switch (birdClick)
-                        {
-                            case 0:
-                                if (melodyManager.IsPuzzleSolved())
-                                {
-                                    birdConvoAnim.SetBool("QuickSolve", true);
-                                    audioManager.PlaySolutionMelody(0.3f);
-                                    solvedParticles.Play();
-                                    doorAnimator.SetBool("PuzzleSolved", true);
-                                    PlayDoorSound();
-                                }
-                                else
-                                {
-                                    birdConvoAnim.SetBool("QuickSolve", false);
-                                }
-                                    birdConvoAnim.SetTrigger("FirstClick");
-                                    birdClick++;
-                                    break;
-                            case 1:
-                                if (!melodyManager.IsPuzzleSolved())
-                                {
-                                    birdConvoAnim.SetBool("Solved", false);
-                                    birdConvoAnim.SetTrigger("SecondClick");
-                                    audioManager.PlayCurrentMelody(0.3f);
-                                    birdClick = 1;
-                                }
-                                else
-                                {
-                                    birdConvoAnim.SetBool("Solved", true);
-                                    birdConvoAnim.SetTrigger("SecondClick");
-                                    audioManager.PlaySolutionMelody(0.3f);
-                                    solvedParticles.Play();
-                                    PlayDoorSound();
-                                    doorAnimator.SetBool("PuzzleSolved", true);
-                                    birdClick = 1;
-                                }
-                                break;
-                        }
-                    }*/
-
-                    if (currentAimedObject.name == "Bird_Solution_Melody")
-                    {
-                        audioManager.PlaySolutionMelody(0.3f);
-                    }
-
                     if (lastAimedCollider != null & flowerPotsColliders.Contains(lastAimedCollider))
                     {
                         ObjectState objectState;
@@ -214,12 +162,27 @@ public class AimingController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("WinTrigger"))
+        {
+            foreach (ParticleSystem p in winParticles)
+            {
+                finishSource.clip = finishedGame;
+                finishSource.Play();
+
+                p.Play();
+            }
+        }
+    }
+
     private IEnumerator PlaySwapSound()
     {
         yield return new WaitForSeconds(0.3f);
         audioSource.clip = swapPotsClip;
         audioSource.Play();
     }
+
     // Coroutine to gradually raise an object.
     private IEnumerator RaiseObjectCoroutine(Transform obj)
     {

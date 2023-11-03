@@ -4,6 +4,8 @@ using System.Collections;
 public class MoveStartPot : MonoBehaviour
 {
     public GameObject startTreeStump; // The object you want to move towards
+    public AudioSource audioSource;
+    public AudioClip movePotClip;
 
     private float stumpXOffset = -0.04f;
     private float stumpYOffset = 1.52f;
@@ -39,6 +41,9 @@ public class MoveStartPot : MonoBehaviour
 
     public void StartMoving()
     {
+        audioSource.clip = movePotClip;
+        audioSource.Play();
+
         if (!isMoving)
         {
             startPotPos = transform.position;

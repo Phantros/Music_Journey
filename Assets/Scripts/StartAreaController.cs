@@ -5,11 +5,11 @@ public class StartAreaController : MonoBehaviour
 {
     public GameObject objectToMove;
     public GameObject targetObject;
+    public ParticleSystem raiseParticles;
+    public AudioSource audioSource;
+    public AudioClip liftPotClip;
 
-    private GameObject firstAimedObject;
-    private GameObject secondAimedObject;
     private MoveStartPot moveObjectScript;
-    private bool isRaised = false;
     private Vector3 originalPosition;
     private float raiseAmount = 0.5f;
     private bool objectRaised = false;
@@ -40,8 +40,10 @@ public class StartAreaController : MonoBehaviour
                     if (!objectRaised)
                     {
                         // Raise the object by the specified amount
+                        raiseParticles.Play();
+                        audioSource.clip = liftPotClip;
+                        audioSource.Play();
                         objectToMove.transform.position += new Vector3(0, raiseAmount, 0);
-                        isRaised = true;
                         objectRaised = true;
                         clickedOnObjectToMove = true;
                     }
@@ -49,7 +51,6 @@ public class StartAreaController : MonoBehaviour
                     {
                         // Lower the object back to its original position
                         objectToMove.transform.position = originalPosition;
-                        isRaised = false;
                         objectRaised = false;
                         clickedOnObjectToMove = false;
                     }
