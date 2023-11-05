@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,7 @@ public class BirdBehavior : MonoBehaviour
     public Animator doorAnimator;
     public AudioClip openDoorsClip, solvedPuzzleClip;
     public MelodyManager melodyManager;
+    public List<Collider> solvedPuzzleElements;
 
     private AudioSource audioSource;
     private int birdClick = 0;
@@ -85,6 +87,11 @@ public class BirdBehavior : MonoBehaviour
     private IEnumerator SolvedPuzzle()
     {
         solvedParticles.Play();
+
+        foreach(Collider solvedObjectCollider in solvedPuzzleElements)
+        {
+            solvedObjectCollider.enabled = false;
+        }
 
         audioManager.PlaySolutionMelody(0.3f);
         while (audioManager.isPlayingMelody)
